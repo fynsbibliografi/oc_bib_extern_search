@@ -1,0 +1,111 @@
+<?php
+/**
+ * Implements hook_block_info().
+ */
+function oc_bib_extern_search_block_info() {
+  $blocks = array();
+  $blocks['oc_extern_Search'] = array(
+    'info' => t('oc external search'),
+  );
+  
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function oc_bib_extern_search_block_view($delta='') {
+  $block = array();
+  
+  switch($delta) {
+    case 'oc_extern_Search' :
+      $block['content'] = oc_bib_extern_search_view();
+      break;
+  }
+  
+  return $block;
+}
+function  oc_bib_extern_search_view()
+{
+    // Parse extended search query parameters.
+  if (arg(0) == 'search') {
+       $advanced_fields = array(
+    'term.title' => array(
+      'key' => 'title',
+      'title' => t('Title'),
+      'description' => t('Enter title'),
+      'type' => 'textfield',
+    ),
+    'term.type' => array(
+      'key' => 'type',
+      'title' => t('Materialetype'),
+      'description' => t('Select type'),
+      'type' => 'select',
+      'options' => '',
+    ),
+    'term.creator' => array(
+      'key' => 'creator',
+      'title' => t('Author'),
+      'description' => t('Enter the author name'),
+      'type' => 'textfield',
+    ),
+    'term.language' => array(
+      'key' => 'language',
+      'title' => t('Language'),
+      'description' => t('Select language'),
+      'type' => 'select',
+      'options' => '',
+    ),
+    'term.subject' => array(
+      'key' => 'cql',
+      'title' => t('Subject'),
+      'description' => t('Enter subject keywords'),
+      'type' => 'textfield',
+    ),
+    'term.creator' => array(
+      'key' => 'creator',
+      'title' => t('Author'),
+      'description' => t('Enter the author name'),
+      'type' => 'textfield',
+    ),
+    'term.subject' => array(
+      'key' => 'subject',
+      'title' => t('Subject'),
+      'description' => t('Enter subject keywords'),
+      'type' => 'textfield',
+    ),
+    'facet.dk5' => array(
+      'key' => 'dk5',
+      'title' => t('dk5'),
+      'description' => t('Enter dk5'),
+      'type' => 'textfield',
+    ),
+    'term.date' => array(
+      'key' => 'date',
+      'index' => 'facet',
+      'title' => t('Year'),
+      'description' => t('Year'),
+      'type' => 'textfield',
+    ),
+  );
+    $parts = explode('/', $_GET['q']);
+    // Lose 'search' and the search type.
+    array_shift($parts);
+    $type = array_shift($parts);
+    $search_query = implode('/', $parts);
+    $indexes = ting_search_extract_keys($search_query, array_keys($advanced_fields));
+    
+    $bibdk_link = "<a target='_blank' href='http://bibliotek.dk/da/search/work/{$indexes['q']}?sort=date_descending&qe[year.op][0]=year_eq&page_id=bibdk_frontpage#content'>Bibliotek.dk</a>";
+    $emu_link = "<a target='_blank' href='http://materialeplatform.emu.dk/materialer/find/uvmat/?q={$indexes['q']}'>EMU</a>";
+    $google = "<a target='_blank' href='http://www.google.com/search?q={$indexes['q']}'>Google</a>";
+    //Build External quries and htlm to show them.
+    $external_links = [];
+    return "<div>{$bibdk_link}<br/>{$emu_link}<br/>{$google}<br/></div>";
+  }
+  else
+  {
+      return t("No Search Params Found");
+  }
+    
+    
+}

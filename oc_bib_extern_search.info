@@ -1,0 +1,6 @@
+name = oc_bib_extern_search
+description = "for embedding in ting_search pages to allow external searches in bib.dk and other 3 party engines."
+package = OC
+core = 7.x
+ 
+
