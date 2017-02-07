@@ -101,7 +101,7 @@ function  oc_bib_extern_search_view()
     $google = "<a target='_blank' href='http://www.google.com/search?q={$indexes['q']}'>Google</a>";
     //Build External quries and htlm to show them.
     $external_links = [];
-    return "<div>{$bibdk_link}<br/>{$emu_link}<br/>{$google}<br/></div>";
+    return t("<div><h2>Fandt du ikke det du søgte?</h2><span>Prøv en Ekstern søgemaskine:<br/></span>!bibdk<br/>!emu<br/>!google<br/></div>",array('!bibdk' => $bibdk_link,'!emu' => $emu_link,'!google'=>$google));
     }
     else
     {
