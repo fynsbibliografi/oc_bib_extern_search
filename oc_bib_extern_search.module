@@ -94,13 +94,19 @@ function  oc_bib_extern_search_view()
     $type = array_shift($parts);
     $search_query = implode('/', $parts);
     $indexes = ting_search_extract_keys($search_query, array_keys($advanced_fields));
-    
+    if(!empty($indexes['q']))
+    {
     $bibdk_link = "<a target='_blank' href='http://bibliotek.dk/da/search/work/{$indexes['q']}?sort=date_descending&qe[year.op][0]=year_eq&page_id=bibdk_frontpage#content'>Bibliotek.dk</a>";
     $emu_link = "<a target='_blank' href='http://materialeplatform.emu.dk/materialer/find/uvmat/?q={$indexes['q']}'>EMU</a>";
     $google = "<a target='_blank' href='http://www.google.com/search?q={$indexes['q']}'>Google</a>";
     //Build External quries and htlm to show them.
     $external_links = [];
     return "<div>{$bibdk_link}<br/>{$emu_link}<br/>{$google}<br/></div>";
+    }
+    else
+    {
+        return "";
+    }
   }
   else
   {
