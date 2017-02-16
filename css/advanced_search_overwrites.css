@@ -1,0 +1,33 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16-02-2017, 10:19:58
+    Author     : amer
+*/
+#edit-advanced .form-item
+{
+    width: 45%;
+    display:inline-block;
+    margin: 10px;
+}
+#edit-advanced
+{
+    border: 0px solid black;
+}
+#edit-advanced legend
+{
+    display:none;
+}
+#edit-advanced .form-text
+{
+    padding-left: 15px !important;
+}
+#edit-advanced .fieldset-wrapper
+{
+    border: 1px solid #efefef;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+}

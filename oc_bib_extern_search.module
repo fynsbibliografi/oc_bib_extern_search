@@ -79,6 +79,7 @@ function  oc_bib_extern_search_view()
       'title' => t('dk5'),
       'description' => t('Enter dk5'),
       'type' => 'textfield',
+      
     ),
     'term.date' => array(
       'key' => 'date',
