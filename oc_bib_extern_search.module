@@ -74,7 +74,7 @@ function  oc_bib_extern_search_view()
       'description' => t('Enter subject keywords'),
       'type' => 'textfield',
     ),
-    'facet.dk5' => array(
+    'dkcclterm.dk' => array(
       'key' => 'dk5',
       'title' => t('dk5'),
       'description' => t('Enter dk5'),
